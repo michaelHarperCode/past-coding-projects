@@ -1,0 +1,41 @@
+---
+title: "Harper - HW09"
+author: "Michael Harper"
+date: '2022-04-06'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Code
+
+The below code data-scrapes a table from the Lewis and Clark Women's Golf Team. The output is a table with a title.
+
+```{r golfTable}
+library(tidyverse)
+library(rvest)
+library(gt)
+
+# Getting stats table from HTML website
+
+golfTable <- read_html("https://www.lcpioneers.com/sports/wgolf/2021-22/files/teamcume.htm")
+golfTable <- golfTable %>% 
+  html_element(xpath = "//table[(((count(preceding-sibling::*) + 1) = 4) and parent::*)]") %>%
+  html_table()
+
+as_tibble(golfTable)
+
+as_tibble(
+  golfTable,
+  validate = NULL,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  rownames = pkgconfig::get_config("tibble::rownames", NULL)
+)
+
+golfTable %>% 
+  gt() %>% 
+  tab_header(title = "LC Women's Team Tournament Stats")
+```
