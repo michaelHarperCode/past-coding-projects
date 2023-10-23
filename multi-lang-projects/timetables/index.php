@@ -33,7 +33,7 @@
 </body>
 </html>
 <?php
-error_reporting(E_ALL);
+error_reporting(0);
 if(!empty($_POST)) {
     $timeSeconds = 0;
     $frequency = 0;
