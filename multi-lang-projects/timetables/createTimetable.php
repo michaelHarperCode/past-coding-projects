@@ -54,7 +54,6 @@ if(!empty($_POST)) {
         $timeSeconds = $timeSeconds + ((int)$time[0] * 60) + $time[1];
     }
     $frequency = $timeSeconds / $_POST['vehNum'];
-    //TODO: Get rid of the deprecated warning here
     $frequencyMinutes = $frequency / 60.0;
     $frequencyMinutes = floor($frequencyMinutes);
     $frequencySeconds = round(fmod($frequency, 60.0));
